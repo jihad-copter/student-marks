@@ -1,82 +1,261 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ku" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Activity Portal</title>
+    <title>Grade Portal | UoR</title>
+    <!-- Modern Kurdish Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;400;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: sans-serif; background: #f0f2f5; display: flex; justify-content: center; padding: 20px; }
-        .card { background: white; padding: 25px; border-radius: 12px; width: 100%; max-width: 500px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        h2 { color: #1a73e8; text-align: center; }
-        .input-group { display: flex; gap: 8px; margin-bottom: 20px; }
-        input { flex: 1; padding: 12px; border: 1px solid #ccc; border-radius: 6px; }
-        button { padding: 10px 20px; background: #1a73e8; color: white; border: none; border-radius: 6px; cursor: pointer; }
-        #res { display: none; margin-top: 20px; border-top: 1px solid #eee; padding-top: 15px; }
-        .rtl { direction: rtl; text-align: right; font-size: 1.2em; margin-bottom: 10px; font-weight: bold; }
-        .row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #f9f9f9; }
-        .row b { color: #555; }
-        .total-row { background: #e8f0fe; padding: 10px; border-radius: 6px; margin-top: 10px; font-weight: bold; color: #d93025; }
-        .error { color: red; text-align: center; display: none; margin-top: 10px; }
+        :root {
+            --primary: #003366; /* Deep University Blue */
+            --accent: #d4af37;  /* Academic Gold */
+            --bg: #f4f7f9;
+            --text: #2d3436;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 800px;
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            overflow: hidden;
+            border-top: 8px solid var(--primary);
+            animation: slideUp 0.8s ease-out;
+        }
+
+        /* Top University Info Header */
+        .uni-header {
+            background: linear-gradient(135deg, #003366 0%, #004d99 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .uni-header h1 { margin: 0; font-size: 1.8rem; letter-spacing: 1px; }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 15px;
+        }
+        .info-item b { color: var(--accent); }
+
+        /* Search Section */
+        .search-section {
+            padding: 40px;
+            text-align: center;
+            background: #fafafa;
+        }
+
+        .search-box {
+            display: flex;
+            max-width: 450px;
+            margin: 0 auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-radius: 50px;
+            overflow: hidden;
+            background: white;
+            border: 2px solid #eee;
+        }
+
+        input {
+            flex: 1;
+            border: none;
+            padding: 15px 25px;
+            outline: none;
+            font-size: 1rem;
+            text-align: left; /* Emails are LTR */
+        }
+
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        button:hover { background: var(--accent); color: var(--primary); }
+
+        /* Results Display */
+        #result-area {
+            display: none;
+            padding: 0 40px 40px 40px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .student-title {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px dashed #eee;
+        }
+
+        .student-title h2 { color: var(--primary); margin: 0; }
+
+        .marks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 15px;
+        }
+
+        .mark-card {
+            background: #fff;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #eee;
+            transition: transform 0.3s;
+        }
+
+        .mark-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+        
+        .mark-label { font-size: 0.8rem; color: #7f8c8d; display: block; margin-bottom: 5px; }
+        .mark-val { font-size: 1.3rem; font-weight: bold; color: var(--primary); }
+
+        /* Hero Total Card */
+        .total-hero {
+            grid-column: 1 / -1;
+            background: linear-gradient(45deg, var(--primary), #0056b3);
+            color: white;
+            padding: 25px;
+            margin-bottom: 15px;
+        }
+        .total-hero .mark-val { color: var(--accent); font-size: 2.5rem; }
+        .total-hero .mark-label { color: rgba(255,255,255,0.8); font-size: 1rem; }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .error { color: #e74c3c; margin-top: 15px; display: none; }
+
+        @media (max-width: 600px) {
+            .info-grid { grid-template-columns: 1fr 1fr; }
+            .search-box { flex-direction: column; border-radius: 10px; }
+            button { padding: 15px; }
+        }
     </style>
 </head>
 <body>
 
-<div class="card">
-    <h2>Student Activity Marks</h2>
-    <div class="input-group">
-        <input type="text" id="email" placeholder="Enter your University Email">
-        <button onclick="findStudent()">View</button>
+<div class="main-container">
+    <!-- Formal Header -->
+    <div class="uni-header">
+        <h1>زانکۆی ڕاپەڕین</h1>
+        <div class="info-grid">
+            <div class="info-item">کۆلێژی: <b>کارگێڕی و دارایی</b></div>
+            <div class="info-item">بەش: <b>ژمێریاری</b></div>
+            <div class="info-item">قۆناغ: <b>دووەم</b></div>
+            <div class="info-item">ساڵ: <b>2025 - 2026</b></div>
+            <div class="info-item">سیمستەر: <b>یەکەم</b></div>
+            <div class="info-item">بابەت: <b>Accounting Software Package</b></div>
+        </div>
+        <p style="margin-top:20px; font-size: 0.85rem; opacity: 0.9;">مامۆستای وانە: پ.ی. جهاد انور قادر</p>
     </div>
-    <div id="err" class="error">Student email not found!</div>
-    <div id="res">
-        <div id="name" class="rtl"></div>
-        <div class="row"><b>Attendance (2%)</b> <span id="att"></span></div>
-        <div class="row"><b>Report (4%)</b> <span id="rap"></span></div>
-        <div class="row"><b>Practice (10%)</b> <span id="prac"></span></div>
-        <div class="row"><b>Theory (10%)</b> <span id="theo"></span></div>
-        <div class="row"><b>Project (8%)</b> <span id="proj"></span></div>
-        <div class="row"><b>Seminar (7%)</b> <span id="sem"></span></div>
-        <div class="row"><b>Assignment (5%)</b> <span id="ass"></span></div>
-        <div class="row"><b>Quiz (4%)</b> <span id="quiz"></span></div>
-        <div class="row"><b>Plus</b> <span id="plus"></span></div>
-        <div class="row total-row"><b>Total Mark (%50)</b> <span id="total"></span></div>
+
+    <!-- Search Section -->
+    <div class="search-section">
+        <div class="search-box">
+            <input type="text" id="emailInput" placeholder="Email (e.g. name.112824...@uor.edu.krd)">
+            <button onclick="fetchMarks()">دەرخستنی نمرە</button>
+        </div>
+        <div id="errorMsg" class="error">ببورە، ئەم ئیمەیڵە بوونی نییە!</div>
+    </div>
+
+    <!-- Results Section -->
+    <div id="result-area">
+        <div class="student-title">
+            <h2 id="studentName"></h2>
+        </div>
+
+        <div class="marks-grid">
+            <!-- Total Hero Card -->
+            <div class="mark-card total-hero">
+                <span class="mark-label">کۆی گشتی چالاکی (50%)</span>
+                <span id="resTotal" class="mark-val">0</span>
+            </div>
+
+            <!-- Individual Marks -->
+            <div class="mark-card"><span class="mark-label">ئامادەبوون (2%)</span><span id="resAtt" class="mark-val"></span></div>
+            <div class="mark-card"><span class="mark-label">ڕاپۆرت (4%)</span><span id="resRap" class="mark-val"></span></div>
+            <div class="mark-card"><span class="mark-label">پراکتیک (10%)</span><span id="resPrac" class="mark-val"></span></div>
+            <div class="mark-card"><span class="mark-label">تیۆری (10%)</span><span id="resTheo" class="mark-val"></span></div>
+            <div class="mark-card"><span class="mark-label">پڕۆژە (8%)</span><span id="resProj" class="mark-val"></span></div>
+            <div class="mark-card"><span class="mark-label">سیمینار (7%)</span><span id="resSem" class="mark-val"></span></div>
+            <div class="mark-card"><span class="mark-label">ئەساینمێنت (5%)</span><span id="resAss" class="mark-val"></span></div>
+            <div class="mark-card"><span class="mark-label">کویز (4%)</span><span id="resQuiz" class="mark-val"></span></div>
+            <div class="mark-card" style="border-color: #27ae60;"><span class="mark-label" style="color:#27ae60;">پڵەس (+)</span><span id="resPlus" class="mark-val"></span></div>
+        </div>
     </div>
 </div>
 
 <script>
-    let students = [];
+    let studentData = [];
 
-    // Load data from the separate JSON file
+    // Fetch data from your external JSON file
     fetch('./data.json')
-        .then(response => response.json())
-        .then(data => students = data);
+        .then(res => res.json())
+        .then(data => { studentData = data; })
+        .catch(err => console.error("Error loading JSON:", err));
 
-    function findStudent() {
-        const mail = document.getElementById('email').value.trim().toLowerCase();
-        const student = students.find(s => s.email.toLowerCase() === mail);
+    function fetchMarks() {
+        const input = document.getElementById('emailInput').value.trim().toLowerCase();
+        const student = studentData.find(s => s.email.toLowerCase() === input);
         
-        const resDiv = document.getElementById('res');
-        const errDiv = document.getElementById('err');
+        const resultArea = document.getElementById('result-area');
+        const errorMsg = document.getElementById('errorMsg');
 
         if (student) {
-            errDiv.style.display = "none";
-            resDiv.style.display = "block";
-            document.getElementById('name').innerText = student.name;
-            document.getElementById('att').innerText = student.att;
-            document.getElementById('rap').innerText = student.rap;
-            document.getElementById('prac').innerText = student.prac;
-            document.getElementById('theo').innerText = student.theo;
-            document.getElementById('proj').innerText = student.proj;
-            document.getElementById('sem').innerText = student.sem;
-            document.getElementById('ass').innerText = student.ass;
-            document.getElementById('quiz').innerText = student.quiz;
-            document.getElementById('plus').innerText = student.plus || 0;
-            document.getElementById('total').innerText = student.total;
+            errorMsg.style.display = "none";
+            resultArea.style.display = "block";
+            
+            // Populate Fields
+            document.getElementById('studentName').innerText = student.name;
+            document.getElementById('resTotal').innerText = student.total;
+            document.getElementById('resAtt').innerText = student.att;
+            document.getElementById('resRap').innerText = student.rap;
+            document.getElementById('resPrac').innerText = student.prac;
+            document.getElementById('resTheo').innerText = student.theo;
+            document.getElementById('resProj').innerText = student.proj;
+            document.getElementById('resSem').innerText = student.sem;
+            document.getElementById('resAss').innerText = student.ass || 0;
+            document.getElementById('resQuiz').innerText = student.quiz;
+            document.getElementById('resPlus').innerText = student.plus || 0;
+
+            // Scroll to results on mobile
+            resultArea.scrollIntoView({ behavior: 'smooth' });
         } else {
-            resDiv.style.display = "none";
-            errDiv.style.display = "block";
+            resultArea.style.display = "none";
+            errorMsg.style.display = "block";
         }
     }
 </script>
+
 </body>
 </html>
