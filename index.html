@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Activity Portal</title>
+    <style>
+        body { font-family: sans-serif; background: #f0f2f5; display: flex; justify-content: center; padding: 20px; }
+        .card { background: white; padding: 25px; border-radius: 12px; width: 100%; max-width: 500px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h2 { color: #1a73e8; text-align: center; }
+        .input-group { display: flex; gap: 8px; margin-bottom: 20px; }
+        input { flex: 1; padding: 12px; border: 1px solid #ccc; border-radius: 6px; }
+        button { padding: 10px 20px; background: #1a73e8; color: white; border: none; border-radius: 6px; cursor: pointer; }
+        #res { display: none; margin-top: 20px; border-top: 1px solid #eee; padding-top: 15px; }
+        .rtl { direction: rtl; text-align: right; font-size: 1.2em; margin-bottom: 10px; font-weight: bold; }
+        .row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #f9f9f9; }
+        .row b { color: #555; }
+        .total-row { background: #e8f0fe; padding: 10px; border-radius: 6px; margin-top: 10px; font-weight: bold; color: #d93025; }
+        .error { color: red; text-align: center; display: none; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Student Activity Marks</h2>
+    <div class="input-group">
+        <input type="text" id="email" placeholder="Enter your University Email">
+        <button onclick="findStudent()">View</button>
+    </div>
+    <div id="err" class="error">Student email not found!</div>
+    <div id="res">
+        <div id="name" class="rtl"></div>
+        <div class="row"><b>Attendance (2%)</b> <span id="att"></span></div>
+        <div class="row"><b>Report (4%)</b> <span id="rap"></span></div>
+        <div class="row"><b>Practice (10%)</b> <span id="prac"></span></div>
+        <div class="row"><b>Theory (10%)</b> <span id="theo"></span></div>
+        <div class="row"><b>Project (8%)</b> <span id="proj"></span></div>
+        <div class="row"><b>Seminar (7%)</b> <span id="sem"></span></div>
+        <div class="row"><b>Assignment (5%)</b> <span id="ass"></span></div>
+        <div class="row"><b>Quiz (4%)</b> <span id="quiz"></span></div>
+        <div class="row"><b>Plus</b> <span id="plus"></span></div>
+        <div class="row total-row"><b>Total Mark (%50)</b> <span id="total"></span></div>
+    </div>
+</div>
+
+<script>
+    let students = [];
+
+    // Load data from the separate JSON file
+    fetch('./data.json')
+        .then(response => response.json())
+        .then(data => students = data);
+
+    function findStudent() {
+        const mail = document.getElementById('email').value.trim().toLowerCase();
+        const student = students.find(s => s.email.toLowerCase() === mail);
+        
+        const resDiv = document.getElementById('res');
+        const errDiv = document.getElementById('err');
+
+        if (student) {
+            errDiv.style.display = "none";
+            resDiv.style.display = "block";
+            document.getElementById('name').innerText = student.name;
+            document.getElementById('att').innerText = student.att;
+            document.getElementById('rap').innerText = student.rap;
+            document.getElementById('prac').innerText = student.prac;
+            document.getElementById('theo').innerText = student.theo;
+            document.getElementById('proj').innerText = student.proj;
+            document.getElementById('sem').innerText = student.sem;
+            document.getElementById('ass').innerText = student.ass;
+            document.getElementById('quiz').innerText = student.quiz;
+            document.getElementById('plus').innerText = student.plus || 0;
+            document.getElementById('total').innerText = student.total;
+        } else {
+            resDiv.style.display = "none";
+            errDiv.style.display = "block";
+        }
+    }
+</script>
+</body>
+</html>
