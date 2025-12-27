@@ -4,88 +4,109 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grade Portal | UoR</title>
-    <!-- Modern Kurdish Font -->
+    <!-- Kurdish Professional Font -->
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #003366; /* Deep University Blue */
-            --accent: #d4af37;  /* Academic Gold */
-            --bg: #f4f7f9;
-            --text: #2d3436;
-            --white: #ffffff;
+            --uor-maroon: #800000;
+            --uor-gold: #d4af37;
+            --uor-blue: #003366;
+            --bg: #f8fafc;
+            --card-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
 
         body {
             font-family: 'Vazirmatn', sans-serif;
             background-color: var(--bg);
-            color: var(--text);
             margin: 0;
             padding: 20px;
             display: flex;
             justify-content: center;
         }
 
-        .main-container {
+        .container {
             width: 100%;
-            max-width: 800px;
-            background: var(--white);
+            max-width: 900px;
+            background: white;
             border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            box-shadow: var(--card-shadow);
             overflow: hidden;
-            border-top: 8px solid var(--primary);
-            animation: slideUp 0.8s ease-out;
+            border: 1px solid #e2e8f0;
         }
 
-        /* Top University Info Header */
-        .uni-header {
-            background: linear-gradient(135deg, #003366 0%, #004d99 100%);
-            color: white;
+        /* Top Header Section */
+        .academic-header {
+            background: linear-gradient(135deg, #fdfdfd 0%, #f1f1f1 100%);
             padding: 30px;
-            text-align: center;
-            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 5px solid var(--uor-maroon);
         }
 
-        .uni-header h1 { margin: 0; font-size: 1.8rem; letter-spacing: 1px; }
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-            font-size: 0.9rem;
-            border-top: 1px solid rgba(255,255,255,0.2);
-            padding-top: 15px;
+        .header-logo, .header-photo {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
         }
-        .info-item b { color: var(--accent); }
+
+        .header-photo {
+            border-radius: 50%;
+            border: 4px solid var(--uor-gold);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            object-fit: cover;
+        }
+
+        .header-text {
+            text-align: center;
+            flex: 1;
+            padding: 0 20px;
+        }
+
+        .header-text h1 { color: var(--uor-maroon); margin: 0; font-size: 1.6rem; }
+        .header-text h2 { color: var(--uor-blue); margin: 5px 0; font-size: 1.1rem; }
+        
+        .info-bar {
+            background: var(--uor-maroon);
+            color: white;
+            padding: 10px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            text-align: center;
+            font-size: 0.85rem;
+        }
 
         /* Search Section */
-        .search-section {
+        .search-area {
             padding: 40px;
+            background: #fff;
             text-align: center;
-            background: #fafafa;
         }
 
         .search-box {
             display: flex;
-            max-width: 450px;
+            max-width: 500px;
             margin: 0 auto;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 2px solid #ddd;
             border-radius: 50px;
             overflow: hidden;
-            background: white;
-            border: 2px solid #eee;
+            transition: 0.3s;
         }
+
+        .search-box:focus-within { border-color: var(--uor-maroon); box-shadow: 0 0 10px rgba(128,0,0,0.1); }
 
         input {
             flex: 1;
-            border: none;
             padding: 15px 25px;
+            border: none;
             outline: none;
             font-size: 1rem;
-            text-align: left; /* Emails are LTR */
+            text-align: left;
         }
 
         button {
-            background: var(--primary);
+            background: var(--uor-maroon);
             color: white;
             border: none;
             padding: 0 30px;
@@ -94,165 +115,157 @@
             transition: 0.3s;
         }
 
-        button:hover { background: var(--accent); color: var(--primary); }
+        button:hover { background: var(--uor-gold); color: #000; }
 
         /* Results Display */
-        #result-area {
+        #result-display {
             display: none;
             padding: 0 40px 40px 40px;
-            animation: fadeIn 0.5s ease;
+            animation: fadeIn 0.6s ease;
         }
 
-        .student-title {
+        .student-header {
+            background: var(--bg);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 25px;
             text-align: center;
-            margin-bottom: 30px;
-            padding-bottom: 10px;
-            border-bottom: 2px dashed #eee;
+            border-right: 8px solid var(--uor-gold);
         }
-
-        .student-title h2 { color: var(--primary); margin: 0; }
 
         .marks-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
             gap: 15px;
         }
 
-        .mark-card {
-            background: #fff;
+        .card {
+            background: white;
             padding: 15px;
             border-radius: 12px;
+            border: 1px solid #edf2f7;
             text-align: center;
-            border: 1px solid #eee;
-            transition: transform 0.3s;
+            transition: 0.3s;
         }
 
-        .mark-card:hover { transform: translateY(-5px); border-color: var(--accent); }
-        
-        .mark-label { font-size: 0.8rem; color: #7f8c8d; display: block; margin-bottom: 5px; }
-        .mark-val { font-size: 1.3rem; font-weight: bold; color: var(--primary); }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
 
-        /* Hero Total Card */
-        .total-hero {
+        .total-card {
             grid-column: 1 / -1;
-            background: linear-gradient(45deg, var(--primary), #0056b3);
+            background: linear-gradient(135deg, var(--uor-maroon) 0%, #500000 100%);
             color: white;
-            padding: 25px;
-            margin-bottom: 15px;
-        }
-        .total-hero .mark-val { color: var(--accent); font-size: 2.5rem; }
-        .total-hero .mark-label { color: rgba(255,255,255,0.8); font-size: 1rem; }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            padding: 30px;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+        .label { font-size: 0.8rem; color: #718096; display: block; margin-bottom: 8px; }
+        .total-card .label { color: var(--uor-gold); font-weight: bold; font-size: 1rem; }
+        .val { font-size: 1.4rem; font-weight: 700; color: var(--uor-blue); }
+        .total-card .val { font-size: 3rem; color: #fff; }
 
-        .error { color: #e74c3c; margin-top: 15px; display: none; }
+        .error { color: #e53e3e; margin-top: 15px; font-weight: bold; display: none; }
 
-        @media (max-width: 600px) {
-            .info-grid { grid-template-columns: 1fr 1fr; }
-            .search-box { flex-direction: column; border-radius: 10px; }
-            button { padding: 15px; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 650px) {
+            .academic-header { flex-direction: column; }
+            .header-logo, .header-photo { margin-bottom: 15px; }
+            .marks-grid { grid-template-columns: 1fr 1fr; }
         }
     </style>
 </head>
 <body>
 
-<div class="main-container">
-    <!-- Formal Header -->
-    <div class="uni-header">
-        <h1>زانکۆی ڕاپەڕین</h1>
-        <div class="info-grid">
-            <div class="info-item">کۆلێژی: <b>کارگێڕی و دارایی</b></div>
-            <div class="info-item">بەش: <b>ژمێریاری</b></div>
-            <div class="info-item">قۆناغ: <b>دووەم</b></div>
-            <div class="info-item">ساڵ: <b>2025 - 2026</b></div>
-            <div class="info-item">سیمستەر: <b>یەکەم</b></div>
-            <div class="info-item">بابەت: <b>Accounting Software Package</b></div>
+<div class="container">
+    <!-- University Header -->
+    <div class="academic-header">
+        <img src="logo.png" alt="UoR Logo" class="header-logo">
+        <div class="header-text">
+            <h1>زانکۆی ڕاپەڕین</h1>
+            <h2>کۆلێژی کارگێڕی و دارایی - بەشی ژمێریاری</h2>
+            <p style="margin: 5px 0; color: #666;">Account Software Package (IT)</p>
+            <strong style="color: var(--uor-maroon);">مامۆستا: پ.ی. جهاد انور قادر</strong>
         </div>
-        <p style="margin-top:20px; font-size: 0.85rem; opacity: 0.9;">مامۆستای وانە: پ.ی. جهاد انور قادر</p>
+        <img src="lecturer.jpg" alt="Lecturer" class="header-photo">
+    </div>
+
+    <!-- Info Banner -->
+    <div class="info-bar">
+        <span>قۆناغ: <b>دووەم</b></span>
+        <span>ساڵی خوێندن: <b>2025 - 2026</b></span>
+        <span>سیمستەر: <b>یەکەم</b></span>
     </div>
 
     <!-- Search Section -->
-    <div class="search-section">
+    <div class="search-area">
+        <p>تکایە ئیمەیڵی زانکۆت بنووسە بۆ بینینی نمرەکانت</p>
         <div class="search-box">
-            <input type="text" id="emailInput" placeholder="Email (e.g. name.112824...@uor.edu.krd)">
-            <button onclick="fetchMarks()">دەرخستنی نمرە</button>
+            <input type="email" id="emailInp" placeholder="example.112824...@uor.edu.krd">
+            <button onclick="findMarks()">گەڕان</button>
         </div>
-        <div id="errorMsg" class="error">ببورە، ئەم ئیمەیڵە بوونی نییە!</div>
+        <div id="errMsg" class="error">ببورە، ئەم ئیمەیڵە تۆمار نەکراوە!</div>
     </div>
 
     <!-- Results Section -->
-    <div id="result-area">
-        <div class="student-title">
-            <h2 id="studentName"></h2>
+    <div id="result-display">
+        <div class="student-header">
+            <h2 id="sName" style="margin:0; color: var(--uor-blue);"></h2>
         </div>
 
         <div class="marks-grid">
-            <!-- Total Hero Card -->
-            <div class="mark-card total-hero">
-                <span class="mark-label">کۆی گشتی چالاکی (50%)</span>
-                <span id="resTotal" class="mark-val">0</span>
+            <div class="card total-card">
+                <span class="label">کۆی گشتی نمرەی چالاکی (50%)</span>
+                <span id="vTotal" class="val"></span>
             </div>
 
-            <!-- Individual Marks -->
-            <div class="mark-card"><span class="mark-label">ئامادەبوون (2%)</span><span id="resAtt" class="mark-val"></span></div>
-            <div class="mark-card"><span class="mark-label">ڕاپۆرت (4%)</span><span id="resRap" class="mark-val"></span></div>
-            <div class="mark-card"><span class="mark-label">پراکتیک (10%)</span><span id="resPrac" class="mark-val"></span></div>
-            <div class="mark-card"><span class="mark-label">تیۆری (10%)</span><span id="resTheo" class="mark-val"></span></div>
-            <div class="mark-card"><span class="mark-label">پڕۆژە (8%)</span><span id="resProj" class="mark-val"></span></div>
-            <div class="mark-card"><span class="mark-label">سیمینار (7%)</span><span id="resSem" class="mark-val"></span></div>
-            <div class="mark-card"><span class="mark-label">ئەساینمێنت (5%)</span><span id="resAss" class="mark-val"></span></div>
-            <div class="mark-card"><span class="mark-label">کویز (4%)</span><span id="resQuiz" class="mark-val"></span></div>
-            <div class="mark-card" style="border-color: #27ae60;"><span class="mark-label" style="color:#27ae60;">پڵەس (+)</span><span id="resPlus" class="mark-val"></span></div>
+            <div class="card"><span class="label">ئامادەبوون (2%)</span><span id="vAtt" class="val"></span></div>
+            <div class="card"><span class="label">ڕاپۆرت (4%)</span><span id="vRap" class="val"></span></div>
+            <div class="card"><span class="label">پراکتیک (10%)</span><span id="vPrac" class="val"></span></div>
+            <div class="card"><span class="label">تیۆری (10%)</span><span id="vTheo" class="val"></span></div>
+            <div class="card"><span class="label">پڕۆژە (8%)</span><span id="vProj" class="val"></span></div>
+            <div class="card"><span class="label">سیمینار (7%)</span><span id="vSem" class="val"></span></div>
+            <div class="card"><span class="label">ئەساینمێنت (5%)</span><span id="vAss" class="val"></span></div>
+            <div class="card"><span class="label">کویز (4%)</span><span id="vQuiz" class="val"></span></div>
+            <div class="card" style="border-bottom: 4px solid #27ae60;"><span class="label">پڵەس (+)</span><span id="vPlus" class="val"></span></div>
         </div>
     </div>
 </div>
 
 <script>
-    let studentData = [];
+    let db = [];
 
-    // Fetch data from your external JSON file
+    // Load the JSON data
     fetch('./data.json')
         .then(res => res.json())
-        .then(data => { studentData = data; })
-        .catch(err => console.error("Error loading JSON:", err));
+        .then(data => db = data)
+        .catch(e => console.error("Data error:", e));
 
-    function fetchMarks() {
-        const input = document.getElementById('emailInput').value.trim().toLowerCase();
-        const student = studentData.find(s => s.email.toLowerCase() === input);
+    function findMarks() {
+        const mail = document.getElementById('emailInp').value.trim().toLowerCase();
+        const student = db.find(s => s.email.toLowerCase() === mail);
         
-        const resultArea = document.getElementById('result-area');
-        const errorMsg = document.getElementById('errorMsg');
+        const resArea = document.getElementById('result-display');
+        const errArea = document.getElementById('errMsg');
 
         if (student) {
-            errorMsg.style.display = "none";
-            resultArea.style.display = "block";
+            errArea.style.display = "none";
+            resArea.style.display = "block";
             
-            // Populate Fields
-            document.getElementById('studentName').innerText = student.name;
-            document.getElementById('resTotal').innerText = student.total;
-            document.getElementById('resAtt').innerText = student.att;
-            document.getElementById('resRap').innerText = student.rap;
-            document.getElementById('resPrac').innerText = student.prac;
-            document.getElementById('resTheo').innerText = student.theo;
-            document.getElementById('resProj').innerText = student.proj;
-            document.getElementById('resSem').innerText = student.sem;
-            document.getElementById('resAss').innerText = student.ass || 0;
-            document.getElementById('resQuiz').innerText = student.quiz;
-            document.getElementById('resPlus').innerText = student.plus || 0;
+            document.getElementById('sName').innerText = student.name;
+            document.getElementById('vTotal').innerText = student.total;
+            document.getElementById('vAtt').innerText = student.att;
+            document.getElementById('vRap').innerText = student.rap;
+            document.getElementById('vPrac').innerText = student.prac;
+            document.getElementById('vTheo').innerText = student.theo;
+            document.getElementById('vProj').innerText = student.proj;
+            document.getElementById('vSem').innerText = student.sem;
+            document.getElementById('vAss').innerText = student.ass || 0;
+            document.getElementById('vQuiz').innerText = student.quiz;
+            document.getElementById('vPlus').innerText = student.plus || 0;
 
-            // Scroll to results on mobile
-            resultArea.scrollIntoView({ behavior: 'smooth' });
+            resArea.scrollIntoView({ behavior: 'smooth' });
         } else {
-            resultArea.style.display = "none";
-            errorMsg.style.display = "block";
+            resArea.style.display = "none";
+            errArea.style.display = "block";
         }
     }
 </script>
