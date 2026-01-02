@@ -13,7 +13,7 @@
   {"id": 12, "name": "ڕێزان عبداللە ابوبکر", "email": "rezan.112824029@uor.edu.krd", "quiz": 0, "ass": 4, "sem": 6.3, "proj": 7.2, "theo": 7.17, "prac": 8, "rap": 4, "att": 2, "plus": 0, "total": 39},
   {"id": 13, "name": "ژاڵە احمد رسول", "email": "zhala.112824031@uor.edu.krd", "quiz": 0, "ass": 1.5, "sem": 6.3, "proj": 7.2, "theo": 7.67, "prac": 5, "rap": 2, "att": 2, "plus": 0.5, "total": 33},
   {"id": 14, "name": "سارا علی حمه شیخ شیخه", "email": "sara.112824012@uor.edu.krd", "quiz": 2, "ass": 2.5, "sem": 6.3, "proj": 7.2, "theo": 5.17, "prac": 5, "rap": 4, "att": 2, "plus": 0, "total": 35},
-  {"id": 15, "name": "ستار محمد قادر", "email": "star.112824001@uor.edu.krd", "quiz": 2, "ass": 2.5, "sem": 7, "proj": 8, "theo": 7.33, "prac": 8.5, "rap": 3.5, "att": 2, "plus": 0, "total": 41},
+  {"id": 15, "name": "ستار محمد قادر", "email": "star.112824001@uor.edu.krd", "quiz": 2, "ass": 2.5, "sem": 7, "proj": 8, "theo": 7.66, "prac": 8.5, "rap": 3.5, "att": 2, "plus": 0, "total": 42},
   {"id": 16, "name": "سەفین صالح محمد", "email": "safeen.112824023@uor.edu.krd", "quiz": 0, "ass": 1.5, "sem": 5.6, "proj": 6.4, "theo": 4, "prac": 6, "rap": 2, "att": 2, "plus": 0, "total": 28},
   {"id": 17, "name": "سەفەر محمد اسماعیل", "email": "safar.112824022@uor.edu.krd", "quiz": 0, "ass": 2, "sem": 4.9, "proj": 5.6, "theo": 4.83, "prac": 6.5, "rap": 4.5, "att": 2, "plus": 0, "total": 31},
   {"id": 18, "name": "شیروان وەهاب قادر", "email": "sherwan.112824020@uor.edu.krd", "quiz": 0, "ass": 0, "sem": 5.6, "proj": 6.4, "theo": 5.5, "prac": 6, "rap": 3.5, "att": 2, "plus": 0, "total": 29},
@@ -54,6 +54,7 @@
   {"id": 53, "name": "هەرمام هیوا جمال احمد", "email": "harmam.111824012@uor.edu.krd", "quiz": 4, "ass": 3, "sem": 5.6, "proj": 6.4, "theo": 5, "prac": 6, "rap": 3.5, "att": 2, "plus": 0, "total": 36},
   {"id": 54, "name": "هەڤاڵ محمد ابراهیم رسول", "email": "haval.111824009@uor.edu.krd", "quiz": 3, "ass": 1.5, "sem": 7, "proj": 8, "theo": 4, "prac": 5, "rap": 2, "att": 2, "plus": 0.5, "total": 33}
 ]
+
 
 
 
