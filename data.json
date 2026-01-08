@@ -23,9 +23,10 @@
   {"id": 22, "name": "عمر خدر همزە", "email": "omer.611223022@uor.edu.krd", "quiz": 4.83, "ass": 3, "sem": 6.3, "proj": 5.6, "theo": 6, "prac": 10, "rap": 2.1, "att": 1.5, "plus": 0, "total": 40},
   {"id": 23, "name": "کارناس علی ناصر", "email": "karnas.611223023@uor.edu.krd", "quiz": 4, "ass": 3, "sem": 6.3, "proj": 7.2, "theo": 6, "prac": 6, "rap": 2.7, "att": 1.5, "plus": 0, "total": 37},
   {"id": 24, "name": "کۆژیار فەرەیدون اورحیم", "email": "kozhyar.611223024@uor.edu.krd", "quiz": 3.33, "ass": 0, "sem": 4.9, "proj": 5.6, "theo": 5, "prac": 4, "rap": 2.1, "att": 1.5, "plus": 0, "total": 27},
-  {"id": 25, "name": "گەشبین رزگار شوکت علی", "email": "gashbeen.611223025@uor.edu.krd", "quiz": 2.5, "ass": 3, "sem": 6.3, "proj": 7.2, "theo": 4, "prac": 1, "rap": 2.7, "att": 1.5, "plus": 0, "total": 29},
-  {"id": 26, "name": "ماردین عثمان محمود", "email": "mardin.611223027@uor.edu.krd", "quiz": 3, "ass": 3, "sem": 6.3, "proj": 7.2, "theo": 6, "prac": 2, "rap": 2.7, "att": 1.5, "plus": 0, "total": 32},
+  {"id": 25, "name": "گەشبین رزگار شوکت علی", "email": "gashbeen.611223025@uor.edu.krd", "quiz": 2.5, "ass": 3, "sem": 7, "proj": 8, "theo": 4, "prac": 1, "rap": 2.7, "att": 1.5, "plus": 0, "total": 30},
+  {"id": 26, "name": "ماردین عثمان محمود", "email": "mardin.611223027@uor.edu.krd", "quiz": 3, "ass": 3, "sem": 7, "proj": 8, "theo": 6, "prac": 2, "rap": 2.7, "att": 1.5, "plus": 0, "total": 34},
   {"id": 27, "name": "محمد ایوب کریم", "email": "mhamad.611223028@uor.edu.krd", "quiz": 1, "ass": 3, "sem": 6.3, "proj": 6.4, "theo": 7, "prac": 8, "rap": 2.4, "att": 1.5, "plus": 0, "total": 36},
   {"id": 28, "name": "مژدە ابراهیم عبداللە", "email": "mzhda.611223029@uor.edu.krd", "quiz": 2.58, "ass": 3, "sem": 7, "proj": 8, "theo": 6, "prac": 3, "rap": 3.0, "att": 2, "plus": 0.5, "total": 36},
   {"id": 29, "name": "هاوکار فەریق تۆفیق", "email": "hawkar.611223030@uor.edu.krd", "quiz": 1.5, "ass": 0, "sem": 4.9, "proj": 4.8, "theo": 7, "prac": 1, "rap": 1.8, "att": 1.5, "plus": 0, "total": 23}
 ]
+
