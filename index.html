@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grade Portal | UoR</title>
-    <!-- فۆنتی فەرمی بۆ زمانی کوردی -->
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -35,7 +34,6 @@
             animation: slideIn 0.8s ease-out;
         }
 
-        /* بەشی سەرەوە - زانیاری زانکۆ و وێنەکان */
         .academic-header {
             background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
             padding: 30px;
@@ -66,8 +64,8 @@
 
         .header-text h1 { color: var(--uor-maroon); margin: 0; font-size: 1.5rem; font-weight: 700; }
         .header-text h2 { color: var(--uor-blue); margin: 5px 0; font-size: 1rem; }
-        .header-text p { margin: 5px 0; font-size: 0.9rem; color: #555; }
-        
+        .header-text p  { margin: 5px 0; font-size: 0.9rem; color: #555; }
+
         .info-bar {
             background: var(--uor-maroon);
             color: white;
@@ -79,7 +77,6 @@
             font-size: 0.85rem;
         }
 
-        /* بەشی گەڕان */
         .search-area {
             padding: 40px;
             text-align: center;
@@ -107,7 +104,7 @@
             border: none;
             outline: none;
             font-size: 1rem;
-            text-align: left; /* ئیمەیڵ لە چەپەوەیە */
+            text-align: left;
         }
 
         button {
@@ -126,7 +123,6 @@
             color: #000;
         }
 
-        /* پیشاندانی ئەنجامەکان */
         #result-display {
             display: none;
             padding: 0 40px 40px 40px;
@@ -166,18 +162,26 @@
             padding: 25px;
         }
 
+        .extra-card {
+            border-bottom: 4px solid #8e44ad;
+        }
+
+        .plus-card {
+            border-bottom: 4px solid #27ae60;
+        }
+
         .label { font-size: 0.8rem; color: #718096; display: block; margin-bottom: 5px; }
         .total-card .label { color: var(--uor-gold); font-size: 1.1rem; font-weight: bold; }
         .val { font-size: 1.4rem; font-weight: 700; color: var(--uor-blue); }
         .total-card .val { font-size: 3rem; color: #fff; }
 
         .error { color: #e53e3e; margin-top: 15px; font-weight: bold; display: none; }
-        
+
         .footer { margin-top: 30px; text-align: center; color: #94a3b8; font-size: 0.8rem; }
         .counter { margin-top: 10px; }
 
         @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
 
         @media (max-width: 600px) {
             .academic-header { flex-direction: column; text-align: center; }
@@ -221,33 +225,34 @@
         </div>
 
         <div class="marks-grid">
+            <!-- کارتی کۆی گشتی -->
             <div class="card total-card">
                 <span class="label">کۆی گشتی نمرەی چالاکی (50%)</span>
                 <span id="vTotal" class="val"></span>
             </div>
 
-            <div class="card"><span class="label">ئامادەبوون (2%)</span><span id="vAtt" class="val"></span></div>
-            <div class="card"><span class="label">ڕاپۆرت (3%)</span><span id="vRap" class="val"></span></div>
-            <div class="card"><span class="label">پراکتیک (10%)</span><span id="vPrac" class="val"></span></div>
-            <div class="card"><span class="label">تیۆری (10%)</span><span id="vTheo" class="val"></span></div>
-            <div class="card"><span class="label">پڕۆژە (8%)</span><span id="vProj" class="val"></span></div>
-            <div class="card"><span class="label">سیمینار (7%)</span><span id="vSem" class="val"></span></div>
-            <div class="card"><span class="label">ئەساینمێنت (5%)</span><span id="vAss" class="val"></span></div>
+            <!-- نمرەکانی تاکەکە -->
             <div class="card"><span class="label">کویز (5%)</span><span id="vQuiz" class="val"></span></div>
-            <div class="card" style="border-bottom: 4px solid #27ae60;"><span class="label">پڵەس (+)</span><span id="vPlus" class="val"></span></div>
+            <div class="card"><span class="label">ڕاپۆرت و ئەساینمێنت (8%)</span><span id="vRapAss" class="val"></span></div>
+            <div class="card"><span class="label">تیۆری (10%)</span><span id="vTheo" class="val"></span></div>
+            <div class="card"><span class="label">پراکتیک (10%)</span><span id="vPrac" class="val"></span></div>
+            <div class="card"><span class="label">سیمینار (7%)</span><span id="vSem" class="val"></span></div>
+            <div class="card"><span class="label">پڕۆژە (8%)</span><span id="vProj" class="val"></span></div>
+            <div class="card"><span class="label">ئامادەبوون (2%)</span><span id="vAtt" class="val"></span></div>
+            <div class="card plus-card"><span class="label">پڵەس (+)</span><span id="vPlus" class="val"></span></div>
+            <div class="card extra-card"><span class="label">Self-Collected Dataset</span><span id="vExtra" class="val"></span></div>
         </div>
     </div>
 </div>
 
 <div class="footer">
-    <p>© 2025 University of Raparin | Accounting Department</p>
+    <p>© 2025 University of Raparin | Software Engineering Department</p>
     <div class="counter">
         <img src="https://hitwebcounter.com/counter/counter.php?page=jihad_uor_portal&style=0006&nbdigits=5&type=page&initCount=0" title="Visitor Counter" Alt="Visitor Counter" border="0" />
     </div>
 </div>
 
 <script>
-    // بەستنەوەی فەرمی بە گووگڵ شیت
     const scriptURL = "https://script.google.com/macros/s/AKfycbwo4ZAXybTYZsHX33skPgSIFPgyVWU-kW9OAoQ1XJkqx-YzNefd_HGykGfbj1qmWf0CDg/exec";
 
     let db = [];
@@ -259,35 +264,38 @@
     function findMarks() {
         const mail = document.getElementById('emailInp').value.trim().toLowerCase();
         const student = db.find(s => s.email.toLowerCase() === mail);
-        
+
         const resArea = document.getElementById('result-display');
         const errArea = document.getElementById('errMsg');
 
         if (student) {
             errArea.style.display = "none";
             resArea.style.display = "block";
-            
-            document.getElementById('sName').innerText = student.name;
-            document.getElementById('vTotal').innerText = student.total;
-            document.getElementById('vAtt').innerText = student.att;
-            document.getElementById('vRap').innerText = student.rap;
-            document.getElementById('vPrac').innerText = student.prac;
-            document.getElementById('vTheo').innerText = student.theo;
-            document.getElementById('vProj').innerText = student.proj;
-            document.getElementById('vSem').innerText = student.sem;
-            document.getElementById('vAss').innerText = student.ass || 0;
-            document.getElementById('vQuiz').innerText = student.quiz;
-            document.getElementById('vPlus').innerText = student.plus || 0;
 
-            // ناردنی زانیاری بۆ گووگڵ شیت بۆ ئەوەی بزانی کێ سەیری کردووە
+            document.getElementById('sName').innerText    = student.name;
+            document.getElementById('vTotal').innerText   = student.total;
+            document.getElementById('vQuiz').innerText    = student.quiz;
+            document.getElementById('vRapAss').innerText  = student.rap_ass;
+            document.getElementById('vTheo').innerText    = student.theo;
+            document.getElementById('vPrac').innerText    = student.prac;
+            document.getElementById('vSem').innerText     = student.sem;
+            document.getElementById('vProj').innerText    = student.proj;
+            document.getElementById('vAtt').innerText     = student.att;
+            document.getElementById('vPlus').innerText    = student.plus  || 0;
+            document.getElementById('vExtra').innerText   = student.extra || 0;
+
             logToSheet(student.name, student.email);
-            
             resArea.scrollIntoView({ behavior: 'smooth' });
         } else {
             resArea.style.display = "none";
             errArea.style.display = "block";
         }
     }
+
+    // گەڕانی ئەنتەر
+    document.getElementById('emailInp').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') findMarks();
+    });
 
     function logToSheet(name, email) {
         fetch(scriptURL, {
@@ -301,4 +309,3 @@
 
 </body>
 </html>
-
